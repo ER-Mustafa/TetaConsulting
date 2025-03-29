@@ -247,7 +247,7 @@ def main():
                 with col_add:
                     if st.button("➕ Add Material", use_container_width=True):
                         st.session_state.bom_rows += 1
-                        st.experimental_rerun()
+                        st.rerun()
                 
                 if st.button("Add Product", type="primary", use_container_width=True):
                     try:

@@ -158,7 +158,7 @@ def main():
                         if st.button("Update Quantity", use_container_width=True):
                             backend.update_material(selected_id, new_qty)
                             st.markdown('<div class="success-box">Quantity updated successfully!</div>', unsafe_allow_html=True)
-                            st.experimental_rerun()
+                            st.rerun()
                     else:
                         st.markdown('<div class="info-box">No materials available</div>', unsafe_allow_html=True)
         
@@ -201,7 +201,7 @@ def main():
                         try:
                             backend.delete_material(selected_id)
                             st.markdown('<div class="success-box">Material deleted successfully!</div>', unsafe_allow_html=True)
-                            st.experimental_rerun()
+                            st.rerun()
                         except Exception as e:
                             st.markdown(f'<div class="error-box">{str(e)}</div>', unsafe_allow_html=True)
             else:
@@ -241,7 +241,7 @@ def main():
                     with cols[2]:
                         if i > 0 and st.button("❌", key=f"remove_{i}"):
                             st.session_state.bom_rows -= 1
-                            st.experimental_rerun()
+                            st.rerun()
                 
                 col_add, col_submit = st.columns([1, 3])
                 with col_add:
@@ -303,7 +303,7 @@ def main():
                 if st.button("Delete Product", type="primary", use_container_width=True):
                     backend.delete_product(selected_id)
                     st.markdown('<div class="success-box">Product deleted successfully!</div>', unsafe_allow_html=True)
-                    st.experimental_rerun()
+                    st.rerun()
             else:
                 st.markdown('<div class="info-box">No products available</div>', unsafe_allow_html=True)
 

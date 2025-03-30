@@ -368,7 +368,7 @@ def main():
         else:
             # Sipariş detaylarını ID'ye göre grupla
             orders = {}
-            for order_id, pname, qty, ts, mname, used in history:
+            for order_id, pname, qty, ts in history:
                 if order_id not in orders:
                     orders[order_id] = {
                         "product": pname,

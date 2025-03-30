@@ -361,14 +361,14 @@ def main():
     # Sipariş Geçmişi
     elif page == "📜 Sipariş Geçmişi":
         st.markdown('<div class="header">📜 Sipariş Geçmişi</div>', unsafe_allow_html=True)
-        history = backend.get_order_history()
+        history = backend.get_order_history_detailed()
         
         if not history:
             st.markdown('<div class="info-box">Henüz sipariş verilmedi</div>', unsafe_allow_html=True)
         else:
             # Sipariş detaylarını ID'ye göre grupla
             orders = {}
-            for order_id, pname, qty, ts in history:
+            for order_id, pname, qty, ts, mname, used in history:
                 if order_id not in orders:
                     orders[order_id] = {
                         "product": pname,

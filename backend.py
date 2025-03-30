@@ -223,5 +223,22 @@ def get_order_history():
     conn.close()
     return history
 
+def get_order_history_detailed():
+    conn = sqlite3.connect('inventory.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+         SELECT o.id, p.name, o.quantity, o.timestamp, m.name, od.quantity_used
+         FROM orders o
+         JOIN products p ON o.product_id = p.id
+         JOIN order_details od ON o.id = od.order_id
+         JOIN materials m ON od.material_id = m.id
+         ORDER BY o.timestamp DESC
+    ''')
+    history = cursor.fetchall()
+    print(history)
+    conn.close()
+    return history
+
+
 # Initialize database on first import
 init_db()

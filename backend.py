@@ -72,7 +72,7 @@ def add_material(name, quantity):
 def update_material(material_id, quantity):
     conn = sqlite3.connect('inventory.db')
     cursor = conn.cursor()
-    cursor.execute('UPDATE materials SET quantity = ? WHERE id = ?', (quantity, material_id))
+    cursor.execute('UPDATE materials SET quantity = quantity + ? WHERE id = ?', (quantity, material_id))
     conn.commit()
     conn.close()
 
@@ -213,14 +213,13 @@ def get_order_history():
     conn = sqlite3.connect('inventory.db')
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT o.id, p.name, o.quantity, o.timestamp, m.name, od.quantity_used
+        SELECT DISTINCT o.id, p.name, o.quantity, o.timestamp
         FROM orders o
         JOIN products p ON o.product_id = p.id
-        JOIN order_details od ON o.id = od.order_id
-        JOIN materials m ON od.material_id = m.id
         ORDER BY o.timestamp DESC
     ''')
     history = cursor.fetchall()
+    print(history)
     conn.close()
     return history
 
